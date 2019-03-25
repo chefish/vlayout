@@ -26,9 +26,9 @@ apply plugin: 'com.android.library'
 
 buildscript {
     repositories {
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-        maven { url "http://oss.jfrog.org/oss-snapshot-local/" }
-        mavenCentral()
+//        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+//        maven { url "http://oss.jfrog.org/oss-snapshot-local/" }
+//        mavenCentral()
         jcenter()
     }
 
