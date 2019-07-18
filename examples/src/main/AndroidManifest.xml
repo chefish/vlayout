@@ -43,7 +43,7 @@
 
         </activity>
         <activity android:name=".OnePlusNLayoutActivity2"></activity>
-        <activity android:name=".OnePlusNLayoutActivity3"></activity>
+        <activity android:name=".TwoPlusOneActivity"></activity>
 
         <activity android:name="com.alibaba.android.vlayout.example.MainActivity">
 

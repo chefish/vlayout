@@ -121,7 +121,7 @@ public class TwoPlusOneLayoutHelper extends AbstractFullFillLayoutHelper {
         setItemCount(0);
     }
 
-    public void setVGap(int vGap) {
+    private void setVGap(int vGap) {
         if (vGap < 0) vGap = 0;
         this.mVGap = vGap;
     }
@@ -378,7 +378,7 @@ public class TwoPlusOneLayoutHelper extends AbstractFullFillLayoutHelper {
             lp3.rightMargin = lp1.rightMargin;
 
             int availableSpace = parentWidth - parentHPadding - lp1.leftMargin - lp1.rightMargin
-                    - lp2.leftMargin - lp2.rightMargin;
+                    - lp2.leftMargin - lp2.rightMargin-mHGap;
             int width2 = Float.isNaN(weight1) ? (int) (availableSpace / 2.0f + 0.5f)
                     : (int) (availableSpace * weight2 / 100 + 0.5f);
             int width1 = Float.isNaN(weight2) ? (int) (availableSpace - width2)
@@ -422,9 +422,10 @@ public class TwoPlusOneLayoutHelper extends AbstractFullFillLayoutHelper {
             layoutChildWithMargin(child1, mAreaRect.left, mAreaRect.top, right1,
                     mAreaRect.top + child1.getMeasuredHeight() + lp1.topMargin + lp1.bottomMargin, helper);
 
-            int right2 = right1 + orientationHelper
+            int left2=right1+mHGap;
+            int right2 = left2 + orientationHelper
                     .getDecoratedMeasurementInOther(child2);
-            layoutChildWithMargin(child2, right1, mAreaRect.top, right2, mAreaRect.bottom, helper);
+            layoutChildWithMargin(child2, left2, mAreaRect.top, right2, mAreaRect.bottom, helper);
 
 
             layoutChildWithMargin(child3, mAreaRect.left, mAreaRect.bottom - orientationHelper.getDecoratedMeasurement(child1),

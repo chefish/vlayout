@@ -19,7 +19,7 @@ public class RootActivity extends ListActivity {
             TestActivity.class.getSimpleName(),
             OnePlusNLayoutActivity.class.getSimpleName(),
             OnePlusNLayoutActivity2.class.getSimpleName(),
-            OnePlusNLayoutActivity3.class.getSimpleName(),
+            TwoPlusOneActivity.class.getSimpleName(),
             DebugActivity.class.getSimpleName(),
             FishTestActivity.class.getSimpleName()
     };
@@ -30,7 +30,7 @@ public class RootActivity extends ListActivity {
             TestActivity.class,
             OnePlusNLayoutActivity.class,
             OnePlusNLayoutActivity2.class,
-            OnePlusNLayoutActivity3.class,
+            TwoPlusOneActivity.class,
             DebugActivity.class,
             FishTestActivity.class
     };
