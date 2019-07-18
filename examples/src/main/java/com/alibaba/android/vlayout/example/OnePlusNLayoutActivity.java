@@ -224,7 +224,7 @@ public class OnePlusNLayoutActivity extends Activity {
             layoutHelper.setAspectRatio(3f);
             adapters.add(new SubAdapter(this, layoutHelper, 2));
         }
-
+//        11-13
         if (ONEN_LAYOUT) {
             OnePlusNLayoutHelper helper = new OnePlusNLayoutHelper();
             helper.setBgColor(0xff876384);
@@ -243,28 +243,28 @@ public class OnePlusNLayoutActivity extends Activity {
                 }
             });
         }
-
+//        14-17
         if (ONEN_LAYOUT) {
             OnePlusNLayoutHelper helper = new OnePlusNLayoutHelper();
             helper.setBgColor(0xff876384);
             helper.setMargin(0, 10, 0, 10);
             adapters.add(new SubAdapter(this, helper, 4));
         }
-
+//        18-22
         if (ONEN_LAYOUT) {
             OnePlusNLayoutHelper helper = new OnePlusNLayoutHelper();
             helper.setBgColor(0xff876384);
             helper.setMargin(0, 10, 0, 10);
             adapters.add(new SubAdapter(this, helper, 5));
         }
-
+//        23-27
         if (ONEN_LAYOUT) {
             OnePlusNLayoutHelperEx helper = new OnePlusNLayoutHelperEx();
             helper.setBgColor(0xff876384);
             helper.setMargin(0, 10, 0, 10);
             adapters.add(new SubAdapter(this, helper, 5));
         }
-
+        //28-31
         if (ONEN_LAYOUT) {
             OnePlusNLayoutHelperEx helper = new OnePlusNLayoutHelperEx();
             helper.setBgColor(0xff876384);
@@ -272,7 +272,7 @@ public class OnePlusNLayoutActivity extends Activity {
             helper.setColWeights(new float[]{40f, 45f, 15f, 60f, 0f});
             adapters.add(new SubAdapter(this, helper, 5));
         }
-
+        //33-37
         if (ONEN_LAYOUT) {
             OnePlusNLayoutHelperEx helper = new OnePlusNLayoutHelperEx();
             helper.setBgColor(0xff876384);

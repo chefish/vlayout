@@ -152,8 +152,10 @@ public class OnePlusNLayoutActivity3 extends Activity {
 
 
         if (ONEN_LAYOUT) {
-            AbstractFullFillLayoutHelper helper = new TwoPlusOneLayoutHelper();
+            TwoPlusOneLayoutHelper helper = new TwoPlusOneLayoutHelper();
             helper.setBgColor(0xff876384);
+            helper.setMargin(0,0,10,0);
+            helper.setColWeights(new float[]{32.25f, 67.75f, 32.25f});
 //            helper.setMargin(10, 10, 10, 10);
 //            helper.setPadding(10, 10, 10, 10);
             adapters.add(new SubAdapter(this, helper, 3) {

@@ -114,9 +114,21 @@ public class TwoPlusOneLayoutHelper extends AbstractFullFillLayoutHelper {
     private float[] mColWeights = new float[0];
 
     private float mRowWeight = Float.NaN;
+    private int mHGap = 0;
+    private int mVGap = 0;
 
     public TwoPlusOneLayoutHelper() {
         setItemCount(0);
+    }
+
+    public void setVGap(int vGap) {
+        if (vGap < 0) vGap = 0;
+        this.mVGap = vGap;
+    }
+
+    public void setHGap(int hGap) {
+        if (hGap < 0) hGap = 0;
+        this.mHGap = hGap;
     }
 
     public TwoPlusOneLayoutHelper(int itemCount) {
@@ -368,9 +380,9 @@ public class TwoPlusOneLayoutHelper extends AbstractFullFillLayoutHelper {
             int availableSpace = parentWidth - parentHPadding - lp1.leftMargin - lp1.rightMargin
                     - lp2.leftMargin - lp2.rightMargin;
             int width2 = Float.isNaN(weight1) ? (int) (availableSpace / 2.0f + 0.5f)
-                    : (int) (availableSpace * weight1 / 100 + 0.5f);
+                    : (int) (availableSpace * weight2 / 100 + 0.5f);
             int width1 = Float.isNaN(weight2) ? (int) (availableSpace - width2)
-                    : (int) (availableSpace * weight2 / 100 + 0.5);
+                    : (int) (availableSpace * weight1 / 100 + 0.5);
             int width3 = Float.isNaN(weight3) ? (int) (width1)
                     : (int) (availableSpace * weight3 / 100 + 0.5);
 
