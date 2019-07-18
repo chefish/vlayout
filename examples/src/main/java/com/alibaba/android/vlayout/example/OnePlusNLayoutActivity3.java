@@ -28,10 +28,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.NonNull;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -43,17 +40,10 @@ import android.widget.TextView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
-import com.alibaba.android.vlayout.OnePlusNLayoutHelper2;
-import com.alibaba.android.vlayout.RecyclablePagerAdapter;
+import com.alibaba.android.vlayout.TwoPlusOneLayoutHelper;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.VirtualLayoutManager.LayoutParams;
-import com.alibaba.android.vlayout.layout.FixLayoutHelper;
-import com.alibaba.android.vlayout.layout.GridLayoutHelper;
-import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
-import com.alibaba.android.vlayout.layout.OnePlusNLayoutHelper;
-import com.alibaba.android.vlayout.layout.OnePlusNLayoutHelperEx;
-import com.alibaba.android.vlayout.layout.ScrollFixLayoutHelper;
-import com.alibaba.android.vlayout.layout.StickyLayoutHelper;
+import com.alibaba.android.vlayout.layout.AbstractFullFillLayoutHelper;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -162,7 +152,7 @@ public class OnePlusNLayoutActivity3 extends Activity {
 
 
         if (ONEN_LAYOUT) {
-            OnePlusNLayoutHelper2 helper = new OnePlusNLayoutHelper2();
+            AbstractFullFillLayoutHelper helper = new TwoPlusOneLayoutHelper();
             helper.setBgColor(0xff876384);
 //            helper.setMargin(10, 10, 10, 10);
 //            helper.setPadding(10, 10, 10, 10);
@@ -226,7 +216,7 @@ public class OnePlusNLayoutActivity3 extends Activity {
 
         @Override
         protected void onBindViewHolderWithOffset(MainViewHolder holder, int position, int offsetTotal) {
-            ((TextView) holder.itemView.findViewById(R.id.title)).setText(Integer.toString(offsetTotal));
+            ((TextView) holder.itemView.findViewById(R.id.title)).setText(Integer.toString(offsetTotal+1));
             ((TextView) holder.itemView.findViewById(R.id.title)).setBackgroundColor(ColorManager.getInstance().colorList.get(offsetTotal));
         }
 

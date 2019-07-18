@@ -102,7 +102,7 @@ import static com.alibaba.android.vlayout.VirtualLayoutManager.VERTICAL;
  * @author villadora
  * @since 1.0.0
  */
-public class OnePlusNLayoutHelper3 extends AbstractFullFillLayoutHelper {
+public class TwoPlusOneLayoutHelper extends AbstractFullFillLayoutHelper {
 
     private static final String TAG = "OnePlusNLayoutHelper";
 
@@ -115,16 +115,16 @@ public class OnePlusNLayoutHelper3 extends AbstractFullFillLayoutHelper {
 
     private float mRowWeight = Float.NaN;
 
-    public OnePlusNLayoutHelper3() {
+    public TwoPlusOneLayoutHelper() {
         setItemCount(0);
     }
 
-    public OnePlusNLayoutHelper3(int itemCount) {
+    public TwoPlusOneLayoutHelper(int itemCount) {
         this(itemCount, 0, 0, 0, 0);
     }
 
-    public OnePlusNLayoutHelper3(int itemCount, int leftMargin, int topMargin, int rightMargin,
-                                 int bottomMargin) {
+    public TwoPlusOneLayoutHelper(int itemCount, int leftMargin, int topMargin, int rightMargin,
+                                  int bottomMargin) {
         setItemCount(itemCount);
     }
 
@@ -359,39 +359,39 @@ public class OnePlusNLayoutHelper3 extends AbstractFullFillLayoutHelper {
 
 
             // make border consistent
-            lp2.topMargin = lp1.topMargin;
-            lp3.bottomMargin = lp1.bottomMargin;
+            lp1.topMargin = lp2.topMargin;
+            lp3.bottomMargin = lp2.bottomMargin;
 
-            lp3.leftMargin = lp2.leftMargin;
-            lp3.rightMargin = lp2.rightMargin;
+            lp3.leftMargin = lp1.leftMargin;
+            lp3.rightMargin = lp1.rightMargin;
 
             int availableSpace = parentWidth - parentHPadding - lp1.leftMargin - lp1.rightMargin
                     - lp2.leftMargin - lp2.rightMargin;
-            int width1 = Float.isNaN(weight1) ? (int) (availableSpace / 2.0f + 0.5f)
+            int width2 = Float.isNaN(weight1) ? (int) (availableSpace / 2.0f + 0.5f)
                     : (int) (availableSpace * weight1 / 100 + 0.5f);
-            int width2 = Float.isNaN(weight2) ? (int) (availableSpace - width1)
+            int width1 = Float.isNaN(weight2) ? (int) (availableSpace - width2)
                     : (int) (availableSpace * weight2 / 100 + 0.5);
-            int width3 = Float.isNaN(weight3) ? (int) (width2)
+            int width3 = Float.isNaN(weight3) ? (int) (width1)
                     : (int) (availableSpace * weight3 / 100 + 0.5);
-
-            helper.measureChildWithMargins(child1,
-                    MeasureSpec.makeMeasureSpec(width1 + lp1.leftMargin + lp1.rightMargin,
-                            MeasureSpec.EXACTLY),
-                    helper.getChildMeasureSpec(helper.getContentHeight(), lp1.height, true));
-
-            int height1 = child1.getMeasuredHeight();
-            int height2 =
-                    Float.isNaN(mRowWeight) ?
-                            (int) ((height1 - lp2.bottomMargin - lp3.topMargin) / 2.0f + 0.5f)
-                            : (int) ((height1 - lp2.bottomMargin - lp3.topMargin) * mRowWeight
-                            / 100 + 0.5f);
-
-            int height3 = height1 - lp2.bottomMargin - lp3.topMargin - height2;
 
             helper.measureChildWithMargins(child2,
                     MeasureSpec.makeMeasureSpec(width2 + lp2.leftMargin + lp2.rightMargin,
                             MeasureSpec.EXACTLY),
-                    MeasureSpec.makeMeasureSpec(height2 + lp2.topMargin + lp2.bottomMargin,
+                    helper.getChildMeasureSpec(helper.getContentHeight(), lp2.height, true));
+
+            int height2 = child2.getMeasuredHeight();
+            int height1 =
+                    Float.isNaN(mRowWeight) ?
+                            (int) ((height2 - lp1.bottomMargin - lp3.topMargin) / 2.0f + 0.5f)
+                            : (int) ((height2 - lp1.bottomMargin - lp3.topMargin) * mRowWeight
+                            / 100 + 0.5f);
+
+            int height3 = height2 - lp1.bottomMargin - lp3.topMargin - height1;
+
+            helper.measureChildWithMargins(child1,
+                    MeasureSpec.makeMeasureSpec(width1 + lp1.leftMargin + lp1.rightMargin,
+                            MeasureSpec.EXACTLY),
+                    MeasureSpec.makeMeasureSpec(height1 + lp1.topMargin + lp1.bottomMargin,
                             MeasureSpec.EXACTLY));
 
             helper.measureChildWithMargins(child3,
@@ -400,22 +400,24 @@ public class OnePlusNLayoutHelper3 extends AbstractFullFillLayoutHelper {
                     MeasureSpec.makeMeasureSpec(height3 + lp3.topMargin + lp3.bottomMargin,
                             MeasureSpec.EXACTLY));
 
-            mainConsumed += Math.max(height1 + lp1.topMargin + lp1.bottomMargin,
-                    height2 + lp2.topMargin + lp2.bottomMargin + height3 + lp3.topMargin
+            mainConsumed += Math.max(height2 + lp2.topMargin + lp2.bottomMargin,
+                    height1 + lp1.topMargin + lp1.bottomMargin + height3 + lp3.topMargin
                             + lp3.bottomMargin);
 
             calculateRect(mainConsumed, mAreaRect, layoutState, helper);
 
-            int right1 = mAreaRect.left + orientationHelper
-                    .getDecoratedMeasurementInOther(child1);
-            layoutChildWithMargin(child1, mAreaRect.left, mAreaRect.top, right1, mAreaRect.bottom, helper);
+            int right1 = mAreaRect.left + orientationHelper.getDecoratedMeasurementInOther(child1);
+            layoutChildWithMargin(child1, mAreaRect.left, mAreaRect.top, right1,
+                    mAreaRect.top + child1.getMeasuredHeight() + lp1.topMargin + lp1.bottomMargin, helper);
 
-            int right2 = right1 + orientationHelper.getDecoratedMeasurementInOther(child2);
-            layoutChildWithMargin(child2, right1, mAreaRect.top, right2,
-                    mAreaRect.top + child2.getMeasuredHeight() + lp2.topMargin + lp2.bottomMargin, helper);
+            int right2 = right1 + orientationHelper
+                    .getDecoratedMeasurementInOther(child2);
+            layoutChildWithMargin(child2, right1, mAreaRect.top, right2, mAreaRect.bottom, helper);
 
-            layoutChildWithMargin(child3, right1, mAreaRect.bottom - orientationHelper.getDecoratedMeasurement(child3),
-                    right1 + orientationHelper.getDecoratedMeasurementInOther(child3), mAreaRect.bottom, helper);
+
+            layoutChildWithMargin(child3, mAreaRect.left, mAreaRect.bottom - orientationHelper.getDecoratedMeasurement(child1),
+                    mAreaRect.left+ orientationHelper.getDecoratedMeasurementInOther(child3), mAreaRect.bottom, helper);
+
             mainConsumed = mAreaRect.bottom - mAreaRect.top + (hasHeader ? 0 : mMarginTop + mPaddingTop) + (hasFooter ? 0 : mMarginBottom + mPaddingBottom);
         } else {
             // TODO: horizontal support
