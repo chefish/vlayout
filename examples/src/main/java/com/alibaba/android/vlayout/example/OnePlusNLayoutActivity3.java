@@ -203,14 +203,14 @@ public class OnePlusNLayoutActivity3 extends Activity {
 
         @Override
         public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new MainViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item1, parent, false));
+            return new MainViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item2, parent, false));
         }
 
         @Override
         public void onBindViewHolder(MainViewHolder holder, int position) {
             // only vertical
-            holder.itemView.setLayoutParams(
-                    new LayoutParams(mLayoutParams));
+//            holder.itemView.setLayoutParams(
+//                    new LayoutParams(mLayoutParams));
         }
 
 
@@ -218,6 +218,14 @@ public class OnePlusNLayoutActivity3 extends Activity {
         protected void onBindViewHolderWithOffset(MainViewHolder holder, int position, int offsetTotal) {
             ((TextView) holder.itemView.findViewById(R.id.title)).setText(Integer.toString(offsetTotal+1));
             ((TextView) holder.itemView.findViewById(R.id.title)).setBackgroundColor(ColorManager.getInstance().colorList.get(offsetTotal));
+            View container = holder.itemView.findViewById(R.id.aaa);
+            ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) container.getLayoutParams();
+            if(offsetTotal==1){
+                mlp.height = 300;
+            }else {
+                mlp.height = 150;
+            }
+            container.setLayoutParams(mlp);
         }
 
         @Override
