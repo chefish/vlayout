@@ -1,18 +1,5 @@
 package com.alibaba.android.vlayout.example;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
-
-import com.alibaba.android.vlayout.DelegateAdapter;
-import com.alibaba.android.vlayout.DelegateAdapter.Adapter;
-import com.alibaba.android.vlayout.LayoutHelper;
-import com.alibaba.android.vlayout.VirtualLayoutManager;
-import com.alibaba.android.vlayout.layout.FixLayoutHelper;
-import com.alibaba.android.vlayout.layout.GridLayoutHelper;
-import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
-import com.alibaba.android.vlayout.layout.StickyLayoutHelper;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,9 +8,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
-import static com.alibaba.android.vlayout.layout.FixLayoutHelper.TOP_RIGHT;
+import com.alibaba.android.vlayout.DelegateAdapter;
+import com.alibaba.android.vlayout.DelegateAdapter.Adapter;
+import com.alibaba.android.vlayout.LayoutHelper;
+import com.alibaba.android.vlayout.VirtualLayoutManager;
+import com.alibaba.android.vlayout.layout.GridLayoutHelper;
+import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by longerian on 2017/11/14.
@@ -32,29 +28,65 @@ import static com.alibaba.android.vlayout.layout.FixLayoutHelper.TOP_RIGHT;
  * @date 2017/11/14
  */
 
-public class DebugActivity extends Activity {
-    private static final String TAG = "DebugActivity";
+public class FishTestActivity extends Activity {
+    private static final String TAG = "FishTestActivity";
+
+    DelegateAdapter delegateAdapter;
+    SubAdapter subAdapter0;
+    ColorManager colorManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+
+        colorManager= new ColorManager();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.main_view);
+
+        initData();
+
         VirtualLayoutManager virtualLayoutManager = new VirtualLayoutManager(this);
-        DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager);
+        delegateAdapter = new DelegateAdapter(virtualLayoutManager);
         List<Adapter> adapterList = new ArrayList<>();
-        adapterList.add(new SubAdapter(new LinearLayoutHelper(0), 20));
+        subAdapter0 = new SubAdapter(new LinearLayoutHelper(0), 3);
+        adapterList.add(subAdapter0);
 //        adapterList.add(new SubAdapter(new StickyLayoutHelper(true), 1));
 //        adapterList.add(new SubAdapter(new LinearLayoutHelper(20), 20));
-        adapterList.add(new SubAdapter(new GridLayoutHelper(4), 80));
+        GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(4,-1,0,20);
+        gridLayoutHelper.setMargin(0,0,20,0);
+        adapterList.add(new SubAdapter(gridLayoutHelper, 20));
+        adapterList.add(new SubAdapter(new LinearLayoutHelper(0), 5));
+        adapterList.add(new SubAdapter(new GridLayoutHelper(4), 72));
         // adapterList.add(new SubAdapter(new FixLayoutHelper(0, 0), 1));
 //        adapterList.add(new SubAdapter(new FixLayoutHelper(TOP_RIGHT, 0, 0), 1));
         delegateAdapter.addAdapters(adapterList);
         recyclerView.setLayoutManager(virtualLayoutManager);
         recyclerView.setAdapter(delegateAdapter);
+
+
+        Button btn = (Button) findViewById(R.id.jump);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data.add(3, 4);
+                subAdapter0.mItemCount++;
+                subAdapter0.notifyDataSetChanged();
+
+            }
+        });
+
     }
 
-    private static class SubAdapter extends DelegateAdapter.Adapter<SubViewHolder> {
+    private void initData() {
+        for (int i = 0; i < 100; i++) {
+            data.add(i);
+        }
+    }
+
+    private List<Integer> data = new ArrayList<>();
+
+
+    private class SubAdapter extends Adapter<SubViewHolder> {
 
         private LayoutHelper mLayoutHelper;
         private int mItemCount;
@@ -72,7 +104,7 @@ public class DebugActivity extends Activity {
         @Override
         public SubViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-            return new SubViewHolder(inflater.inflate(R.layout.item, parent, false));
+            return new SubViewHolder(inflater.inflate(R.layout.item1, parent, false));
         }
 
         @Override
@@ -83,7 +115,8 @@ public class DebugActivity extends Activity {
         @Override
         protected void onBindViewHolderWithOffset(SubViewHolder holder, int position, int offsetTotal) {
             super.onBindViewHolderWithOffset(holder, position, offsetTotal);
-            holder.setText(String.valueOf(offsetTotal));
+            Log.d(TAG, "onBindViewHolderWithOffset: position="+position+" offsetTotal="+offsetTotal+" "+this);
+            holder.setText("" + data.get(offsetTotal),colorManager.colorList.get(position));
             holder.itemView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
 
@@ -106,8 +139,9 @@ public class DebugActivity extends Activity {
             Log.d(TAG, "cnt =" + existing);
         }
 
-        public void setText(String title) {
+        public void setText(String title,int color) {
             ((TextView) itemView.findViewById(R.id.title)).setText(title);
+            itemView.setBackgroundColor(color);
         }
 
         @Override

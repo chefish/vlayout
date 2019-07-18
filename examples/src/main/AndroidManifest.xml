@@ -42,6 +42,8 @@
         <activity android:name="com.alibaba.android.vlayout.example.OnePlusNLayoutActivity">
 
         </activity>
+        <activity android:name=".OnePlusNLayoutActivity2"></activity>
+        <activity android:name=".OnePlusNLayoutActivity3"></activity>
 
         <activity android:name="com.alibaba.android.vlayout.example.MainActivity">
 
@@ -58,6 +60,8 @@
         <activity android:name="com.alibaba.android.vlayout.example.DebugActivity">
 
         </activity>
+
+        <activity android:name=".FishTestActivity"></activity>
 
     </application>
 
