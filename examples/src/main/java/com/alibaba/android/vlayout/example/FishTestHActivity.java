@@ -52,12 +52,11 @@ public class FishTestHActivity extends Activity {
         //virtualLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         delegateAdapter = new DelegateAdapter(virtualLayoutManager);
         adapterList = new ArrayList<>();
-        subAdapter0 = new SubAdapter(new LinearLayoutHelper(0), 30);
+        subAdapter0 = new SubAdapter(new LinearLayoutHelper(0), 3);
         adapterList.add(subAdapter0);
         //////3-22
-        //GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(4,-1,0,20);
-        //gridLayoutHelper.setMargin(0,0,20,0);
-        //adapterList.add(new SubAdapter(gridLayoutHelper, 20));
+        GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(4,-1,0,0);
+        adapterList.add(new SubAdapter(gridLayoutHelper, 20));
         //LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper(0);
         //linearLayoutHelper.setMarginTop(15);
         ////只有头一个有效果
@@ -166,7 +165,7 @@ public class FishTestHActivity extends Activity {
             super.onBindViewHolderWithOffset(holder, position, offsetTotal);
             Log.d(TAG, "onBindViewHolderWithOffset: position="+position+" offsetTotal="+offsetTotal+" "+this);
             holder.setText("" + data.get(offsetTotal),colorManager.colorList.get(position));
-            holder.itemView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            //holder.itemView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
 
         @Override
