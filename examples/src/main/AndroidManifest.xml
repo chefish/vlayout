@@ -59,6 +59,8 @@
 
         </activity>
 
+        <activity android:name=".FishTestHActivity"></activity>
+        <activity android:name=".FishTestActivity"></activity>
     </application>
 
 </manifest>
