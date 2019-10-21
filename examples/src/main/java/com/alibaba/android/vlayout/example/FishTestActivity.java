@@ -50,20 +50,18 @@ public class FishTestActivity extends Activity {
         adapterList = new ArrayList<>();
         subAdapter0 = new SubAdapter(new LinearLayoutHelper(0), 3);
         adapterList.add(subAdapter0);
-//        adapterList.add(new SubAdapter(new StickyLayoutHelper(true), 1));
-//        adapterList.add(new SubAdapter(new LinearLayoutHelper(20), 20));
+
         //3-22
         GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(4,-1,0,20);
         gridLayoutHelper.setMargin(0,0,20,0);
         adapterList.add(new SubAdapter(gridLayoutHelper, 20));
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper(0);
         linearLayoutHelper.setMarginTop(15);
-//        linearLayoutHelper.setDividerHeight(15);
+
         //只有头一个有效果
         adapterList.add(new SubAdapter(linearLayoutHelper, 5));
         adapterList.add(new SubAdapter(new GridLayoutHelper(4), 72));
-        // adapterList.add(new SubAdapter(new FixLayoutHelper(0, 0), 1));
-//        adapterList.add(new SubAdapter(new FixLayoutHelper(TOP_RIGHT, 0, 0), 1));
+
         delegateAdapter.addAdapters(adapterList);
         recyclerView.setLayoutManager(virtualLayoutManager);
         recyclerView.setAdapter(delegateAdapter);
