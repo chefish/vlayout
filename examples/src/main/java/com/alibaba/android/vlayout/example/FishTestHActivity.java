@@ -56,6 +56,7 @@ public class FishTestHActivity extends Activity {
         adapterList.add(subAdapter0);
         //////3-22
         GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(4,-1,0,0);
+        gridLayoutHelper.setVGap(10);
         adapterList.add(new SubAdapter(gridLayoutHelper, 12));
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper(0);
         //linearLayoutHelper.setMarginTop(15);
