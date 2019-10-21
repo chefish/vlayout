@@ -435,7 +435,7 @@ public class GridLayoutHelper extends BaseLayoutHelper {
             } else {
                 helper.measureChildWithMargins(view,
                     getMainDirSpec(lp.width, mTotalSize, View.MeasureSpec.getSize(spec),
-                        lp.mAspectRatio), View.MeasureSpec.getSize(spec));
+                        lp.mAspectRatio), spec);
             }
             final int size = orientationHelper.getDecoratedMeasurement(view);
             if (size > maxSize) {
