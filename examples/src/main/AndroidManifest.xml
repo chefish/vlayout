@@ -47,6 +47,10 @@
 
         </activity>
 
+        <activity android:name="com.alibaba.android.vlayout.example.MainActivity1">
+
+        </activity>
+
         <activity android:name="com.alibaba.android.vlayout.example.TestActivity">
 
         </activity>
