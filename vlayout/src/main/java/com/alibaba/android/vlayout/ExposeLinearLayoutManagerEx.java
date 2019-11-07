@@ -1163,6 +1163,8 @@ class ExposeLinearLayoutManagerEx extends LinearLayoutManager {
                 break;
             }
             layoutState.mOffset += layoutChunkResultCache.mConsumed * layoutState.mLayoutDirection;
+            FishLog.d("ExposeLinearLayoutManagerEx","layoutState.mOffset="+layoutState.mOffset);
+
             /**
              * Consume the available space if:
              * * layoutChunk did not request to be ignored

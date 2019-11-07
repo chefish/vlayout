@@ -52,12 +52,16 @@ public class FishTestHActivity extends Activity {
         //virtualLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         delegateAdapter = new DelegateAdapter(virtualLayoutManager);
         adapterList = new ArrayList<>();
-        subAdapter0 = new SubAdapter(new LinearLayoutHelper(0), 3);
+        LinearLayoutHelper linearLayoutHelper33 = new LinearLayoutHelper(0);
+        linearLayoutHelper33.setMarginRight(100);
+        subAdapter0 = new SubAdapter(linearLayoutHelper33, 10);
         adapterList.add(subAdapter0);
         //////3-22
-        GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(4,-1,0,0);
+        GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(1,-1,0,0);
         gridLayoutHelper.setVGap(10);
-        adapterList.add(new SubAdapter(gridLayoutHelper, 12));
+        //gridLayoutHelper.setHGap(10);
+        gridLayoutHelper.setMarginRight(100);
+        adapterList.add(new SubAdapter(gridLayoutHelper, 8));
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper(0);
         //linearLayoutHelper.setMarginTop(15);
         ////只有头一个有效果

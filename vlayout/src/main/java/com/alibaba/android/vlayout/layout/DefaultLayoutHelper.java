@@ -31,7 +31,7 @@ import com.alibaba.android.vlayout.LayoutHelper;
  */
 public class DefaultLayoutHelper extends LinearLayoutHelper {
 
-    public static LayoutHelper newHelper(int itemCount) {
+    public static DefaultLayoutHelper newHelper(int itemCount) {
         DefaultLayoutHelper helper = new DefaultLayoutHelper();
         helper.setItemCount(itemCount);
         return helper;

@@ -134,8 +134,8 @@ public class MainActivity1 extends Activity {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                recyclerView.scrollToPosition(7);
-                recyclerView.getAdapter().notifyDataSetChanged();
+                //recyclerView.scrollToPosition(7);
+                //recyclerView.getAdapter().notifyDataSetChanged();
             }
         }, 6000);
     }

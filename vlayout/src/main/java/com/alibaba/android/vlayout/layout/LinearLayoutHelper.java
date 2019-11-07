@@ -24,6 +24,7 @@
 
 package com.alibaba.android.vlayout.layout;
 
+import com.alibaba.android.vlayout.FishLog;
 import com.alibaba.android.vlayout.LayoutManagerHelper;
 import com.alibaba.android.vlayout.OrientationHelperEx;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
@@ -168,7 +169,8 @@ public class LinearLayoutHelper extends BaseLayoutHelper {
 
         OrientationHelperEx orientationHelper = helper.getMainOrientationHelper();
         result.mConsumed = orientationHelper.getDecoratedMeasurement(view) + startSpace + endSpace + gap;
-        int left, top, right, bottom;
+        FishLog.d("LinearLayoutHelper"," result.mConsumed="+ result.mConsumed);
+        int left, top, right, bottom
         if (helper.getOrientation() == VERTICAL) {
             // not support RTL now
             if (helper.isDoLayoutRTL()) {
