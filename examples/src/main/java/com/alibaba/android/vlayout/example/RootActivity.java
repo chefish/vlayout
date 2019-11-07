@@ -21,7 +21,8 @@ public class RootActivity extends ListActivity {
         DebugActivity.class.getSimpleName(),
         FishTestHActivity.class.getSimpleName(),
         FishTestActivity.class.getSimpleName(),
-        MainActivity1.class.getSimpleName()
+        MainActivity1.class.getSimpleName(),
+        MainActivity2.class.getSimpleName(),
     };
 
     private Class[] mActivities = new Class[] {
@@ -32,7 +33,8 @@ public class RootActivity extends ListActivity {
         DebugActivity.class,
         FishTestHActivity.class,
         FishTestActivity.class,
-        MainActivity1.class
+        MainActivity1.class,
+        MainActivity2.class
     };
 
     @Override

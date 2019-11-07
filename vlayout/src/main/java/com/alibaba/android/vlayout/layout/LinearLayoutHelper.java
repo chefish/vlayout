@@ -170,7 +170,7 @@ public class LinearLayoutHelper extends BaseLayoutHelper {
         OrientationHelperEx orientationHelper = helper.getMainOrientationHelper();
         result.mConsumed = orientationHelper.getDecoratedMeasurement(view) + startSpace + endSpace + gap;
         FishLog.d("LinearLayoutHelper"," result.mConsumed="+ result.mConsumed);
-        int left, top, right, bottom
+        int left, top, right, bottom;
         if (helper.getOrientation() == VERTICAL) {
             // not support RTL now
             if (helper.isDoLayoutRTL()) {
